@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adding book info to Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        h2{
+            text-align: center;
+            background-color:rgb(130, 130, 240);
+            color: rgb(255, 255, 255);
+            border: 3px solid rgb(130, 130, 240);
+        }
+        table {
+            font-family: monospace;
+            font-weight: bold;
+
+        color: rgb(0, 0, 0);
+        border: 3px solid rgb(130, 130, 240);
+        z-index: -4;
+        }
+        
+        body{
+            margin: auto;
+            padding: 0%;
+            height: 0;
+ 
+        }
+       
+         .navbar{
+             margin: 25px;
+             top: 0px;
+             width: 100;
+             background-color: rgb(130, 130, 240);
+             border-radius: 3px solid white;
+                     }
+ 
+         .navbar ul{
+             overflow: auto;
+         }
+ 
+         .navbar li{
+             
+           display: inline-flex;
+             list-style: none;
+             margin: 30px 16px ;
+             
+             
+         }
+ 
+         .navbar li a{
+             
+             padding: 3px 3px;
+             text-decoration: none;
+             color: rgb(0, 0, 0);
+ 
+         }
+ 
+         .navbar li a:hover{
+             color: black;
+         }
+ 
+         .btn{
+             font-family: monospace;
+             font-weight: bold;
+             background-color: white;
+             border: none;
+             padding: 6px;
+             cursor: pointer;
+             font-size: 13px;
+             border-radius: 4px;
+ 
+         }
+         html{
+              
+                 background: url(/booktable2.jfif) no-repeat center center fixed; 
+                 -webkit-background-size: cover;
+                 -moz-background-size: cover;
+                 -o-background-size: cover;
+                 background-size: cover;
+               
+         }
+         .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        th,td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        
+        #data {
+            margin-bottom: 10px;
+        }
+        
+        #data input, button {
+            padding: 10px;
+            width: 150px;
+        }
+ 
+         footer {
+             font-family: monospace;
+             font-weight: bold;
+             text-align: center;
+             background-color: rgb(130, 130, 240);
+             color: #fff;
+             padding: 20px;
+             position: absolute;
+             bottom: -330px;
+             width: 100%;
+             /* position: fixed;
+             z-index: 1; */
+           }
+ 
+           footer a{
+               color: #fff;
+               text-decoration: none;
+           }
+        
+   
+    </style>
+   
+
+</head>
+<body>
+    
+    <header>
+       
+        <nav class="navbar">
+            <ul>
+              
+                <li><a href="/SKBOOKS.html" class="btn">Home</a></li>
+                <li><a href="/htmlweek1day1dtask2.html" class="btn">Book List</a></li>
+                <li><a href="/htmlweek1day1ctask.html" class="btn">Book Table</a></li>
+                <li><a href="/htmlweek1day2task2.html" class="btn">Contact Us</a></li>
+                <li><a href="/jsinputform.html" class="btn">Add Book Info</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h2>Book Info Form:</h2>
+        <form action="#">
+            <div class="form-group">
+                <label for="name">Name Of The Book:</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter Name Of the book here" name="bookname">
+              </div>
+
+          <div class="form-group">
+            <label for="authorname">Authors Name:</label>
+            <input type="text" class="form-control" id="author" placeholder="Enter Authors name" name="authorname">
+          </div>
+          <div class="form-group">
+            <label for="description">Book Description:</label>
+            <input type="text" class="form-control" id="desc" placeholder="Enter Book Description" name="descr">
+          </div>
+          <div class="form-group">
+            <label for="price">Book Price:</label>
+            <input type="numbers" class="form-control" id="pric" placeholder="Enter Book Price" name="price">
+          </div>
+         
+          <button type="button" onclick="saveData()" id="save_btn" class="btn btn-default">Submit</button>
+        </form>
+      </div>
+<footer>
+    <p>This Page Is Created By <a href="https://www.linkedin.com/in/shantanu1998">Shantanu Khandelwal</a> &copy;</p>
+</footer>
+</body>
+<script>
+    function saveData()
+    {
+    let name,author,desc,pric;
+    name=document.getElementById("name").value;
+    author=document.getElementById("author").value;
+    desc=document.getElementById("desc").value;
+    pric=document.getElementById("pric").value;
+    
+    let user_records=new Array();
+    user_records=JSON.parse(localStorage.getItem("users"))?JSON.parse(localStorage.getItem("users")):[]
+    if(user_records.some((v)=>{return v.desc==desc}))
+    {
+      alert("duplicate data");
+    }
+    else
+    {
+      user_records.push({
+      "name":name,
+      "author":author,
+      "desc":desc,
+      "pric":pric
+    })
+    localStorage.setItem("users",JSON.stringify(user_records));
+    }
+    
+    }
+              </script>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+        .heading{
+            text-align: center;
+            background-color:rgb(130, 130, 240);
+            color: rgb(255, 255, 255);
+            border: 3px solid rgb(130, 130, 240);
+        }
+        h2{
+            text-align: center;
+            background-color:rgb(130, 130, 240);
+            color: rgb(255, 255, 255);
+            border: 3px solid rgb(130, 130, 240);
+        }
+        table {
+            font-family: monospace;
+            font-weight: bold;
+
+        color: rgb(0, 0, 0);
+        border: 3px solid rgb(130, 130, 240);
+        z-index: -4;
+        }
+
+        .hrow {
+            font-family: monospace;
+            font-weight: bold;
+
+        color: rgb(0, 0, 0);
+        border: 3px solid rgb(130, 130, 240);
+        }
+        th,td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        .addbook{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+             font-family: monospace;
+            font-weight: bold;
+
+        color: rgb(0, 0, 0);
+        border: 3px solid rgb(130, 130, 240);
+        }
+        body{
+            margin: auto;
+            padding: 0%;
+            height: 0;
+ 
+        }
+       
+         .navbar{
+             margin: 25px;
+             top: 0px;
+             width: 100;
+             background-color: rgb(130, 130, 240);
+             border-radius: 3px solid white;
+         }
+ 
+         .navbar ul{
+             overflow: auto;
+         }
+ 
+         .navbar li{
+             
+           display: inline-flex;
+             list-style: none;
+             margin: 30px 16px ;
+             
+             
+         }
+ 
+         .navbar li a{
+             
+             padding: 3px 3px;
+             text-decoration: none;
+             color: rgb(0, 0, 0);
+ 
+         }
+ 
+         .navbar li a:hover{
+             color: black;
+         }
+ 
+         .btn{
+             font-family: monospace;
+             font-weight: bold;
+             background-color: white;
+             border: none;
+             padding: 6px;
+             cursor: pointer;
+             font-size: 13px;
+             border-radius: 4px;
+ 
+         }
+         html{
+              
+                 background: url(/booktable2.jfif) no-repeat center center fixed; 
+                 -webkit-background-size: cover;
+                 -moz-background-size: cover;
+                 -o-background-size: cover;
+                 background-size: cover;
+               
+         }
+ 
+         footer {
+             font-family: monospace;
+             font-weight: bold;
+             text-align: center;
+             background-color: rgb(130, 130, 240);
+             color: #fff;
+             padding: 20px;
+             position: absolute;
+             bottom: -330px;
+             width: 100%;
+             /* position: fixed;
+             z-index: 1; */
+           }
+ 
+           footer a{
+               color: #fff;
+               text-decoration: none;
+           }
+    </style>
+</head>
+<body>
+    <header>
+       
+        <nav class="navbar">
+            <ul>
+              
+                <li><a href="/SKBOOKS.html" class="btn">Home</a></li>
+                <li><a href="/htmlweek1day1dtask2.html" class="btn">Book List</a></li>
+                <li><a href="/htmlweek1day1ctask.html" class="btn">Book Table</a></li>
+                <li><a href="/htmlweek1day2task2.html" class="btn">Contact Us</a></li>
+                <li><a href="/jsinputform.html" class="btn">Add Book Info</a></li>
+            </ul>
+        </nav>
+    </header>
+	
+        <div class="addbook">
+            <div class="head">NEW BOOK</div>
+            <form onsubmit="event.preventDefault()" autocomplete="off">
+                <div>
+                    <div class="col"><input type="text" id="title" placeholder=" Book Title"></div>
+    
+                    <div class="col"><input type="text" id="bauth" placeholder=" Author"></div>
+
+                    <div><textarea id="Bdes" placeholder=" Description"></textarea></div>
+
+					<div class="col"><input type="numbers" id="Bprice" placeholder=" Price"></div>
+                </div>
+					<button id="btn" >Add Book</button>
+            </form>
+        </div>
+
+	<div class="heading">BOOK TABLE</div>
+	<table class="table">
+		<tr class="hrow">
+			<th>S.No</th>
+			<th>BOOK TITLE</th>
+			<th>AUTHOR</th>
+			<th>DESCRIPTION</th>
+			<th>PRICE</th>
+			<th>EDIT / DELETE</th>
+		</tr>
+
+		<tr id="showBooks"></tr>
+	</table>
+
+    <footer>
+        <p>This page is created by Shantanu Khandelwal &copy;</p>
+    </footer>
+
+	<script>
+
+		let btnAdd = document.querySelector("#btn");
+
+		btnAdd.addEventListener("click",bookdata);
+
+		function bookdata(){
+			readData()
+			showData()
+			//insertData(tranferdata)
+			reset()
+		}
+
+		const readData = () =>
+		{
+			let title,auth,des,price;
+
+			title = document.getElementById("title").value;
+			auth = document.getElementById("bauth").value;
+			des = document.getElementById("Bdes").value;
+			price = document.getElementById("Bprice").value;
+
+			let book_records = new Array()
+			book_records = JSON.parse(localStorage.getItem("Books"))?JSON.parse(localStorage.getItem("Books")):[]
+			book_records.push({
+				"title" : title,
+				"bauth" : auth,
+				"Bdes" : des,
+				"Bprice" : price
+			})
+			//console.log(book_records);
+			localStorage.setItem("Books",JSON.stringify(book_records));
+		}
+
+		const showData = ()=>{
+			let book_records = new Array()
+			book_records = JSON.parse(localStorage.getItem("Books"))?JSON.parse(localStorage.getItem("Books")):[]
+		
+			//console.log(book_records);
+			if(book_records)
+			{
+				let sno = 1;
+				for(let i=0;i<book_records.length;i++)
+				{
+                    
+					let table = document.createElement('');
+					
+
+					/*console.log(book_records[i].auth);
+					console.log(book_records[i].Bdes);
+					console.log(book_records[i].Bprice);*/
+
+					table.innerHTML = `<tr><td>${sno}</td>
+                        <td>${book_records[i].title}</td>
+                        <td>${book_records[i].bauth}</td>
+                        <td>${book_records[i].Bdes}</td>
+                        <td>${book_records[i].Bprice}</td><td><button><a href="javascript:void(0)" onclick="editData(${i})">Edit</a></button> / <button><a href="javascript:void(0)" onclick="deleteData(${i})">Delete</a></button</td></tr>`;
+					sno++;
+				
+					document.getElementById("showBooks").appendChild(table);
+				}
+			}
+		}
+
+		
+		/*function editData(rid)
+		{
+			let book_records = JSON.parse(localStorage.getItem("Books"));
+
+
+			document.getElementById("title").value=book_records[rid];
+			document.getElementById("img").value=book_records[rid];
+			document.getElementById("bauth").value=book_records[rid];
+			document.getElementById("Bdes").value=book_records[rid];
+			document.getElementById("Bprice").value=book_records[rid];
+		}*/
+		
+		function deleteData(rid)
+		{
+			let book_records = JSON.parse(localStorage.getItem("Books"));
+			book_records.splice(rid,1);
+			localStorage.setItem("Books",JSON.stringify(book_records));
+			showData();
+		}
+
+		function reset()
+		{
+			document.getElementById("title").value="";
+			document.getElementById("bauth").value="";
+			document.getElementById("Bdes").value="";
+			document.getElementById("Bprice").value="";
+		}
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Crud</title>
+    <style>
+        h2{
+            text-align: center;
+            background-color:rgb(130, 130, 240);
+            color: rgb(255, 255, 255);
+            border: 3px solid rgb(130, 130, 240);
+        }
+        table {
+            font-family: monospace;
+            font-weight: bold;
+
+        color: rgb(0, 0, 0);
+        border: 3px solid rgb(130, 130, 240);
+        z-index: -4;
+        }
+        
+        body{
+            margin: auto;
+            padding: 0%;
+            height: 0;
+ 
+        }
+       
+         .navbar{
+             margin: 25px;
+             top: 0px;
+             width: 100;
+             background-color: rgb(130, 130, 240);
+             border-radius: 3px solid white;
+                     }
+ 
+         .navbar ul{
+             overflow: auto;
+         }
+ 
+         .navbar li{
+             
+           display: inline-flex;
+             list-style: none;
+             margin: 30px 16px ;
+             
+             
+         }
+ 
+         .navbar li a{
+             
+             padding: 3px 3px;
+             text-decoration: none;
+             color: rgb(0, 0, 0);
+ 
+         }
+ 
+         .navbar li a:hover{
+             color: black;
+         }
+ 
+         .btn{
+             font-family: monospace;
+             font-weight: bold;
+             background-color: white;
+             border: none;
+             padding: 6px;
+             cursor: pointer;
+             font-size: 13px;
+             border-radius: 4px;
+ 
+         }
+         html{
+              
+                 background: url(/booktable2.jfif) no-repeat center center fixed; 
+                 -webkit-background-size: cover;
+                 -moz-background-size: cover;
+                 -o-background-size: cover;
+                 background-size: cover;
+               
+         }
+ 
+         footer {
+             font-family: monospace;
+             font-weight: bold;
+             text-align: center;
+             background-color: rgb(130, 130, 240);
+             color: #fff;
+             padding: 20px;
+             position: absolute;
+             bottom: -330px;
+             width: 100%;
+             /* position: fixed;
+             z-index: 1; */
+           }
+ 
+           footer a{
+               color: #fff;
+               text-decoration: none;
+           }
+        
+   
+    </style>
+</head>
+<body>
+    <header>
+       
+        <nav class="navbar">
+            <ul>
+              
+                <li><a href="/SKBOOKS.html" class="btn">Home</a></li>
+                <li><a href="/htmlweek1day1dtask2.html" class="btn">Book List</a></li>
+                <li><a href="/htmlweek1day1ctask.html" class="btn">Book Table</a></li>
+                <li><a href="/htmlweek1day2task2.html" class="btn">Contact Us</a></li>
+                <li><a href="/jsinputform.html" class="btn">Add Book Info</a></li>
+            </ul>
+        </nav>
+    </header>
+	<h2>Enter Book Details</h2>
+    <form action="backend.php">
+        
+        <div>
+            <fieldset>
+                <legend style="border: 2px solid rgb(130, 130, 240)">
+                    Book Name: 
+                </legend>
+                <input type="text" id="bookname">
+            </fieldset>
+        </div>
+        <br>
+        <div>
+            <fieldset>
+                <legend style="border: 2px solid rgb(130, 130, 240)">Enter Author Name:</legend> 
+             <input type="text" id="authorname">
+            </fieldset>
+            
+        </div>
+        <br>
+        <div>
+            <fieldset>
+                <legend  style="border: 2px solid rgb(130, 130, 240)  "  >
+                    Book Price: 
+                </legend>
+                <input type="number" id="bookprice">
+            </fieldset>
+        </div>
+        <br>
+        <div>
+            <fieldset>
+                <legend style="border: 2px solid rgb(130, 130, 240)">
+                   Book Description: 
+                </legend>
+                <textarea id="bookdescription" id="" cols="30" rows="10"></textarea>
+            </fieldset>
+            
+        </div>
+        <br>
+        <div>
+            <input type="button" value="Submit" onclick='manageData()'>
+        </div>
+    </form>
+
+<div id="msg"></div>
+
+<h2>List</h2>
+<table border="1">
+	<thead>
+		<tr>
+			<td>S.No</td>
+			<td>Name Of The Book</td>
+			<td>Book Price</td>
+			<td>Book Description</td>
+		</tr>
+	<thead>
+	<tbody id="root">
+	
+	<tbody>
+</table>
+
+</body>
+<script src="/crudoperations.js"></script>
+</html>
+
